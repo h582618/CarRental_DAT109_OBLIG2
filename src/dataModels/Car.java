@@ -8,6 +8,10 @@ public class Car {
 	private int km;
 	private String group;
 	private boolean available;
+	private int officeNumber;
+	
+	
+	
 	public String getLicenseNumber() {
 		return licenseNumber;
 	}
