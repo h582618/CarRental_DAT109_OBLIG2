@@ -6,8 +6,37 @@ public class Car {
 	private String brand;
 	private String color;
 	private int km;
-	private String group;
+	private int group;
 	private boolean available;
+	private int officeNumber;
+	public String img;
+	
+	
+	public Car(String licenseNumber, String brand, String color, int km, int group, boolean available,
+			int officeNumber, String img) {
+		super();
+		this.licenseNumber = licenseNumber;
+		this.brand = brand;
+		this.color = color;
+		this.km = km;
+		this.group = group;
+		this.available = available;
+		this.officeNumber = officeNumber;
+		this.img = img;
+		
+	}
+	public int getOfficeNumber() {
+		return officeNumber;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public void setOfficeNumber(int officeNumber) {
+		this.officeNumber = officeNumber;
+	}
 	public String getLicenseNumber() {
 		return licenseNumber;
 	}
@@ -32,10 +61,10 @@ public class Car {
 	public void setKm(int km) {
 		this.km = km;
 	}
-	public String getGroup() {
+	public int getGroup() {
 		return group;
 	}
-	public void setGroup(String group) {
+	public void setGroup(int group) {
 		this.group = group;
 	}
 	public boolean isAvailable() {
