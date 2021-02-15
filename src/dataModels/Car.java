@@ -10,10 +10,11 @@ public class Car {
 	private boolean available;
 	private int officeNumber;
 	public String img;
-	
+	public int dayPrice;
+	public int totalPrice;
 	
 	public Car(String licenseNumber, String brand, String color, int km, int group, boolean available,
-			int officeNumber, String img) {
+			int officeNumber, String img, int dayPrice) {
 		super();
 		this.licenseNumber = licenseNumber;
 		this.brand = brand;
@@ -23,8 +24,18 @@ public class Car {
 		this.available = available;
 		this.officeNumber = officeNumber;
 		this.img = img;
+		this.dayPrice = dayPrice;
 		
 	}
+	public int getDayPrice() {
+		return dayPrice;
+	}
+	
+	
+	public void setPrice(int days) {
+		this.dayPrice *= days;
+	}
+	
 	public int getOfficeNumber() {
 		return officeNumber;
 	}

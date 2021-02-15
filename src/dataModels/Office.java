@@ -9,14 +9,16 @@ public class Office {
 	private Address address;
 	private int phoneNumber;
 	private List<Car> cars;
+	private CarRental carRental;
 	
 	
-	public Office(int officeNumber, Address address, int phoneNumber, ArrayList<Car> cars) {
+	public Office(int officeNumber, Address address, int phoneNumber, ArrayList<Car> cars, CarRental carrental) {
 		super();
 		this.officeNumber = officeNumber;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.cars = cars;
+		this.carRental = carrental;
 	}
 	/**
 	 * 
