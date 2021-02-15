@@ -1,5 +1,6 @@
 package dataModels;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Office {
@@ -8,6 +9,28 @@ public class Office {
 	private Address address;
 	private int phoneNumber;
 	private List<Car> cars;
+	
+	
+	public Office(int officeNumber, Address address, int phoneNumber, ArrayList<Car> cars) {
+		super();
+		this.officeNumber = officeNumber;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.cars = cars;
+	}
+	/**
+	 * 
+	 * @param car
+	 */
+	public void returnCar(Car car) {
+		car.setOfficeNumber(this.officeNumber);
+		cars.add(car);
+	}
+	public void deliverCar(Car car) {
+		car.setOfficeNumber(0);
+		cars.remove(car);
+	}
+	
 	public int getOfficeNumber() {
 		return officeNumber;
 	}

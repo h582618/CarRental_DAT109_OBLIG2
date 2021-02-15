@@ -13,6 +13,21 @@ public class Reservation {
 	private Date returnDateTime;
 	private Office returnOffice;
 	private int returnKm;
+	
+	
+	public Reservation(Customer customer, Card creditCard, int licenseNumber, int pickupKM, Date pickupDateTime,
+			Office pickupOffice, Date returnDateTime, Office returnOffice, int returnKm) {
+		this.customer = customer;
+		this.creditCard = creditCard;
+		this.licenseNumber = licenseNumber;
+		this.pickupKM = pickupKM;
+		this.pickupDateTime = pickupDateTime;
+		this.pickupOffice = pickupOffice;
+		this.returnDateTime = returnDateTime;
+		this.returnOffice = returnOffice;
+		this.returnKm = returnKm;
+		
+	}
 	public Customer getCustomer() {
 		return customer;
 	}
