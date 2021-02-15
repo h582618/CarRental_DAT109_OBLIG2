@@ -42,7 +42,9 @@ public class HomePageServlet extends HttpServlet {
 		String group = request.getParameter("group");
 		
 		HttpSession session = request.getSession();
-	
+
+		
+		
 		if(pickupOffice != "" && pickupDate != "" && returnDate != "" && group != "") {
 			
 			session.setAttribute("pickupOffice",pickupOffice);
