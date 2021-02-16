@@ -20,6 +20,16 @@ public class CarRental {
 		this.offices = new ArrayList<Office>();
 	}
 
+	public List<Car> totalCars() {
+		
+		List<Car> cars = new ArrayList<Car>();
+		
+		for(Office office : offices) {
+			cars.addAll(office.getCars());
+		}
+		return cars;
+	}
+	
 	public void addOffice(Office office) {
 		offices.add(office);
 	}

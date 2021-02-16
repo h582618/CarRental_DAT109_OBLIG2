@@ -47,14 +47,14 @@ public class RegisterServlet extends HttpServlet {
 		}
 		request.getRequestDispatcher("WEB-INF/registerPage.jsp").forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+			
+		
 		ServletContext sc = request.getServletContext();
 		HttpSession session = request.getSession();
 		List<Car> cars = (ArrayList<Car>) sc.getAttribute("cars");
@@ -98,7 +98,6 @@ public class RegisterServlet extends HttpServlet {
 					new Customer(firstName, lastName, new Address(streetAddress, postalCode, postalPlace), phoneNumber),
 					new Card(ccNumber, ccv, ccDate), licenseNumber, choosenCar.getKm(), pickupDate, pickupOffice,
 					returnDate, returnOffice);
-			
 			choosenCar.setAvailable(false, reservation);
 			sc.setAttribute(licenseNumber+"Res", reservation);
 			session.setAttribute("reservation", reservation);

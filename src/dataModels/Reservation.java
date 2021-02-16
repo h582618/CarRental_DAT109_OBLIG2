@@ -35,6 +35,19 @@ public class Reservation {
 		this.pickupOffice = pickupOffice;
 		this.returnDateTime = returnDateTime;
 		this.returnOffice = returnOffice;
+	}
+	public int amount(LocalDate actualReturnDate, int price) {
+		
+		if(actualReturnDate.compareTo(returnDateTime) == 0) {
+			return price*actualReturnDate.compareTo(pickupDateTime);
+		} else {
+			
+			int expectedPrice = price*returnDateTime.compareTo(pickupDateTime);
+			
+			int fee = (int) (price*1.5*actualReturnDate.compareTo(returnDateTime));
+
+			return expectedPrice + fee;
+		}
 		
 	}
 	

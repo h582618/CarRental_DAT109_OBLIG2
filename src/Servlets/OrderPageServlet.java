@@ -111,6 +111,7 @@ public class OrderPageServlet extends HttpServlet {
 		int days = returnDate.getDayOfYear() - pickupDate.getDayOfYear();
 		
 		sc.setAttribute("cars", availableCars);
+		sc.setAttribute("totalCars", carRental.totalCars());
 		
 		sc.setAttribute("carRental", carRental);
 		

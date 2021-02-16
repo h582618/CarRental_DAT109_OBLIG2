@@ -10,8 +10,16 @@
 <body>
 <h1> Return car </h1>
 	<form method="post" action="ReturnPageServlet">
-		<p>License number<p> <input type="text" name="licencePlate" value="" />
+		<select name="licencePlate"> 
+			<c:forEach items="${totalCars}" var="x">
+					<option value="${x.licenseNumber}"> License number : ${x.licenseNumber}, brand: ${x.brand} </option>
+			</c:forEach>
+		</select>
+		<p>Date <input type="date" name="returnDate" value="2021-09-29" required/> <p>
+		<p>Kilometer <input type="text" name="returnKM" value="" required/> <p>
 		<button type="submit">Return Car</button>
 	</form>
+	<button onclick="location.href='HomePageServlet'" type="button">
+        Home</button>
 </body>
 </html>

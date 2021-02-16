@@ -18,14 +18,18 @@
 		
 		<p> <input type="date" value="2021-09-26" name="pickupDate" /> Pickup date</p>
 		<p> <input type="date" value="2021-09-29" name="returnDate" /> Return date </p>
-		<select  name="group">
+		
+		<p> Type <select  name="group">
 		 		<option value ="0" selected>Show all</option>
-		        <option value ="1">Sedan</option>
 		        <option value ="2">SUV</option>
 		        <option value ="3">COUPE</option>
-		</select>
-		<button type="submit">Submit</button>
+		       	<option value ="1">Sedan</option>
+		</select> </p> 
+		<button type="submit">Search for cars</button>
 	</fieldset>
 </form>
+<br> 
+ <button onclick="location.href='ReturnPageServlet'" type="button">
+     Click here to return a Car </button>
 </body>
 </html>
