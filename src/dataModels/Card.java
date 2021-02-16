@@ -18,15 +18,22 @@ public class Card {
 		this.date = date;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
-	private int number;
+	private String number;
 	private int cvv;
 	private String date;
 	
-	public int getNumber() {
+	public String getNumber() {
 		return number;
+	}
+
+	public Card(String number, int cvv, String date) {
+		super();
+		this.number = number;
+		this.cvv = cvv;
+		this.date = date;
 	}
 }

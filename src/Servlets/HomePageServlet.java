@@ -44,17 +44,17 @@ public class HomePageServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		
-		
 		if(pickupOffice != "" && pickupDate != "" && returnDate != "" && group != "") {
 			
-			session.setAttribute("pickupOffice",pickupOffice);
-			session.setAttribute("pickupDate",pickupDate);
-			session.setAttribute("returnDate",returnDate);
+			session.setAttribute("pickupOfficeTxt",pickupOffice);
+			session.setAttribute("pickupDateTxt",pickupDate);
+			session.setAttribute("returnDateTxt",returnDate);
 			session.setAttribute("group",group);
 			response.sendRedirect("OrderPageServlet");
 			return;
 			
 		};
+		
 		
 		request.setAttribute("aarsak", "Ugyldig input");
 		response.sendRedirect("HomePageServlet");

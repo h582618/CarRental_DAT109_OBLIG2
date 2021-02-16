@@ -15,15 +15,14 @@ public class Customer {
 		
 	}
 	
-	public Customer(String firstName, String lastName, Address address, int phoneNumber, Reservation reservation) {
+	public Customer(String firstName, String lastName, Address address, int phoneNumber) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
-		this.reservation = reservation;
 	}
-
+	
 	public String getFirstName() {
 		return firstName;
 	}

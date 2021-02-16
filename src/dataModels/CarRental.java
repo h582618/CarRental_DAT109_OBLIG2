@@ -1,19 +1,39 @@
 package dataModels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CarRental {
 	private String name;
 	private int phoneNumber;
 	private Address companyAddress;
+	private List<Office> offices;
 	
 	public CarRental() {
 		
 	}
-	
 	public CarRental(String name, int phoneNumber, Address companyAddress) {
 
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.companyAddress = companyAddress;
+		this.offices = new ArrayList<Office>();
+	}
+
+	public void addOffice(Office office) {
+		offices.add(office);
+	}
+	
+	public void removeOffice(Office office) {
+		offices.remove(office);
+	}
+	
+	public List<Office> getOffices() {
+		return offices;
+	}
+
+	public void setOffices(List<Office> offices) {
+		this.offices = offices;
 	}
 
 	public String getName() {
