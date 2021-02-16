@@ -12,7 +12,6 @@ public class CarRental {
 	public CarRental() {
 		
 	}
-	
 	public CarRental(String name, int phoneNumber, Address companyAddress) {
 
 		this.name = name;
