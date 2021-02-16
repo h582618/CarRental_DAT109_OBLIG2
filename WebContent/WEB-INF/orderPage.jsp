@@ -16,7 +16,8 @@
 				<div style="width: 200px;">
 					<p>Brand : ${x.brand}</p>
 					<p>Color : ${x.color}</p>
-					<p>Price : ${days*x.dayPrice} kr</p>
+					<p>Price per day: ${x.dayPrice} kr</p>
+					<p>Total price : ${days*x.dayPrice} kr</p>
 					<input type="hidden" name="choosenCar" value="${x.licenseNumber}">
 					<button type="submit">Order car</button>
 				</div>

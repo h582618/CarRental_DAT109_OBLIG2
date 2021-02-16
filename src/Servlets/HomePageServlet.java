@@ -22,7 +22,6 @@ public class HomePageServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -30,11 +29,11 @@ public class HomePageServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("WEB-INF/startPage.jsp").forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		
 		String pickupOffice = request.getParameter("pickupOffice");
 		String pickupDate = request.getParameter("pickupDate");
@@ -42,7 +41,6 @@ public class HomePageServlet extends HttpServlet {
 		String group = request.getParameter("group");
 		
 		HttpSession session = request.getSession();
-
 		
 		if(pickupOffice != "" && pickupDate != "" && returnDate != "" && group != "") {
 			

@@ -39,13 +39,17 @@
 			</p>
 				<input type="hidden" name="licenseNumber" value="${choosenCar.licenseNumber}"
 				required/> 
+				<p> Return office
 				<select name="returnOffice"> 
 					<option value="1" selected> Gardemoen </option>
 					<option value="2"> Flesland </option>
 				</select>
+				</p>
 		<button type="submit">Submit</button>
 		</fieldset>
 	</form>
-
+<br> 
+<button onclick="location.href='HomePageServlet'" type="button">
+        Home</button>
 </body>
 </html>

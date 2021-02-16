@@ -47,14 +47,14 @@ public class RegisterServlet extends HttpServlet {
 		}
 		request.getRequestDispatcher("WEB-INF/registerPage.jsp").forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+			
+		
 		ServletContext sc = request.getServletContext();
 		HttpSession session = request.getSession();
 		List<Car> cars = (ArrayList<Car>) sc.getAttribute("cars");
@@ -87,29 +87,28 @@ public class RegisterServlet extends HttpServlet {
 
 		Office returnOffice = offices.stream().filter(x -> x.getOfficeNumber() == returnOfficeNumber).findFirst()
 				.orElseThrow();	
-		
-
 		// Veldig enkel valdiering, i realtiteten hadde vi gjort dette mye mer
 		// omfattende.
 		if (firstName != "" && lastName != "" && streetAddress != "" && postalCode != 0 && postalPlace != ""
 				&& phoneNumber != 0 && ccNumber != "" && ccDate != "" && ccv != 0 && licenseNumber != ""
 				&& returnOffice != null && pickupOffice != null
-				&& pickupDate.compareTo(returnDate) > 0 ) {
+				&& pickupDate.compareTo(returnDate) < 0 ) {
 			
 			Reservation reservation = new Reservation(
 					new Customer(firstName, lastName, new Address(streetAddress, postalCode, postalPlace), phoneNumber),
 					new Card(ccNumber, ccv, ccDate), licenseNumber, choosenCar.getKm(), pickupDate, pickupOffice,
 					returnDate, returnOffice);
-
-			
 			choosenCar.setAvailable(false, reservation);
 			sc.setAttribute(licenseNumber+"Res", reservation);
-		
 			session.setAttribute("reservation", reservation);
 
-		};
+			request.getRequestDispatcher("WEB-INF/confirmation.jsp").forward(request, response);
+		}
+		else {
+			response.sendRedirect("RegisterServlet");
+			
+		}
 		
-		request.getRequestDispatcher("WEB-INF/confirmation.jsp").forward(request, response);
 	}
 
 }
