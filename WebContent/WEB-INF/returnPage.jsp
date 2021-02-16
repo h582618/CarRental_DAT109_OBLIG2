@@ -8,8 +8,9 @@
 <title>Return</title>
 </head>
 <body>
-	<form method="post" action="ReturnServlet">
-		<input type="text" name="licencePlate" value="" />
+<h1> Return car </h1>
+	<form method="post" action="ReturnPageServlet">
+		<p>License number<p> <input type="text" name="licencePlate" value="" />
 		<button type="submit">Return Car</button>
 	</form>
 </body>

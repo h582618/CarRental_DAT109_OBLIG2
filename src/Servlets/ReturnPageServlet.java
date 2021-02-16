@@ -28,6 +28,7 @@ public class ReturnPageServlet extends HttpServlet {
 		
 		String licencePlate = request.getParameter("licencePlate");
 		
+		
 		cars.stream().filter(x -> x.getLicenseNumber().equals(licencePlate)).findFirst()
 		.orElseThrow().setAvailable(true,null);
 		
