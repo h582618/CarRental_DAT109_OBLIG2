@@ -12,6 +12,7 @@ public class Car {
 	public String img;
 	public int dayPrice;
 	public int totalPrice;
+	public Reservation reservation;
 	
 	public Car(String licenseNumber, String brand, String color, int km, int group, boolean available,
 			int officeNumber, String img, int dayPrice) {
@@ -31,7 +32,12 @@ public class Car {
 		return dayPrice;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Car [licenseNumber=" + licenseNumber + ", brand=" + brand + ", color=" + color + ", km=" + km
+				+ ", group=" + group + ", available=" + available + ", officeNumber=" + officeNumber + ", img=" + img
+				+ ", dayPrice=" + dayPrice + ", totalPrice=" + totalPrice + "]";
+	}
 	public void setPrice(int days) {
 		this.dayPrice *= days;
 	}
@@ -81,7 +87,8 @@ public class Car {
 	public boolean isAvailable() {
 		return available;
 	}
-	public void setAvailable(boolean available) {
+	public void setAvailable(boolean available, Reservation reservation) {
+		this.reservation = reservation;
 		this.available = available;
 	}
 	

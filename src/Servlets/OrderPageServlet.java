@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,13 +43,16 @@ public class OrderPageServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		String pickupOffice = (String) session.getAttribute("pickupOffice");
-		LocalDate pickupDate = LocalDate.parse((String) session.getAttribute("pickupDate"));
-		LocalDate returnDate = LocalDate.parse((String) session.getAttribute("returnDate"));
+		String pickupOfficeTxt = (String) session.getAttribute("pickupOfficeTxt");
+		LocalDate pickupDate = LocalDate.parse((String)session.getAttribute("pickupDateTxt"));
+		LocalDate returnDate = LocalDate.parse((String)session.getAttribute("returnDateTxt"));
+		Office pickupOffice = null;
 		int group = Integer.parseInt((String) session.getAttribute("group"));
 
-		// I virkeligheten hadde vi hatt dette lagret i en database, men lager det her
-		// for å gjøre det lett.
+		/* I virkeligheten hadde vi hatt dette lagret i en database, men lager det her
+		 for å gjøre det lett. Vi vet at objektene vil bli lagret på nytt hver gang denne getten kjøres.
+		 
+		 */
 		Car Maserati = new Car("MM", "Maserati", "Black", 15000, 3, true, 1,
 				"https://cdn.motor1.com/images/mgl/6gXgr/s1/maserati-ghibli-ribelle.jpg",1500);
 		Car BMWE87 = new Car("SU33007", "BMW", "RED", 200000, 1, true, 2,
@@ -57,9 +62,10 @@ public class OrderPageServlet extends HttpServlet {
 		Car TeslaX = new Car("DogeCoin", "Tesla X", "Blue", 35000, 2, true, 2,
 				"https://m.atcdn.co.uk/vms/media/w1920/b7857dadc51c4a38a730d65ddfb09e26.jpg",700);
 
-		CarRental carRental = new CarRental("GuttaCorp Utleie", 12345678,
+		CarRental carRental = new CarRental("GuttaCorp Rental", 12345678,
 				new Address("Wallstreet 55", 12345, "New York"));
 
+		
 		Office Gardemoen = new Office(1, new Address("Gardemoenveien 33", 1345, "Oslo"), 1234567, new ArrayList<Car>() {
 			{
 				add(Maserati);
@@ -73,18 +79,24 @@ public class OrderPageServlet extends HttpServlet {
 				add(RangeRover);
 			}
 		}, carRental);
+		
+		carRental.addOffice(Gardemoen);
+		
+		carRental.addOffice(Flesland);
 
+		ServletContext sc = request.getServletContext();
+		
 		List<Car> availableCars = null;
 
 		
-		
-		if (pickupOffice.equals("Gardemoen")) {
+		if (pickupOfficeTxt.equals("Gardemoen")) {
 			if (group == 0) {
 				availableCars = Gardemoen.getCars().stream().filter(x -> x.isAvailable()).collect(Collectors.toList());
 			} else {
 				availableCars = Gardemoen.getCars().stream().filter(x -> x.isAvailable() && x.getGroup() == group)
 						.collect(Collectors.toList());
 			}
+			pickupOffice = Gardemoen;
 
 		} else {
 			if (group == 0) {
@@ -93,16 +105,25 @@ public class OrderPageServlet extends HttpServlet {
 				availableCars = Flesland.getCars().stream().filter(x -> x.isAvailable() && x.getGroup() == group)
 						.collect(Collectors.toList());
 			}
-
+			pickupOffice = Flesland;
 		}
 		
 		int days = returnDate.getDayOfYear() - pickupDate.getDayOfYear();
 		
-		request.setAttribute("cars", availableCars);
-
-		request.setAttribute("days", days);
+		sc.setAttribute("cars", availableCars);
+		
+		sc.setAttribute("carRental", carRental);
+		
+		session.setAttribute("days", days);
+		
+		session.setAttribute("pickupDate", pickupDate);
+		
+		session.setAttribute("returnDate", returnDate);
+		
+		session.setAttribute("pickupOffice", pickupOffice);
 		
 		request.getRequestDispatcher("WEB-INF/orderPage.jsp").forward(request, response);
+		
 	}
 
 	/**
@@ -111,8 +132,17 @@ public class OrderPageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		ServletContext sc = request.getServletContext();
+		HttpSession session = request.getSession();
+		String licenseNumber = request.getParameter("choosenCar");
+
+		List<Car> cars = (ArrayList<Car>)sc.getAttribute("cars");
+	
+		Car choosenCar = cars.stream().filter(x -> x.getLicenseNumber().equals(licenseNumber)).findFirst().orElseThrow();
+		
+		session.setAttribute("choosenCar", choosenCar);
+		response.sendRedirect("RegisterServlet");
 	}
 
 }
